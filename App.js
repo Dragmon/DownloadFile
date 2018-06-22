@@ -26,8 +26,12 @@ export default class App extends Component<Props> {
 
     onPressDownload(){
         const dirs = RNFetchBlob.fs.dirs;
-        let namefile = 'TV-paga' + '.ibooks';
-        let dirfile = dirs.DocumentDir + '/' + namefile;
+        //let urldownload = 'https://www.dropbox.com/s/35kr6i0m45kabzg/iBook%20TV%20de%20paga.ibooks?dl=1';
+        let urldownload = 'https://apihavas.televisaventas.tv/global/uploads/ibooks/ibooks_screen_shot_2017_10_25_at_1_41_49_pm_png_thumb_400x720.jpg';
+        let namefile = 'TV-paga';
+        //let extencion = '.ibooks';
+        let extencion = '.jpg';
+        let dirfile = dirs.DocumentDir + '/' + namefile + extencion;
     /*
         RNFetchBlob.fs.exists(dirfile)
             .then((exist) => {
@@ -58,6 +62,10 @@ export default class App extends Component<Props> {
                 console.log("error ", err)
             })
     */
+
+    /* Descarga del archivo si no existe*/
+
+
         RNFetchBlob.fs.exists(dirfile)
             .then((exist) => {
                 if (!exist){
@@ -70,7 +78,7 @@ export default class App extends Component<Props> {
                             //appendExt : 'ibooks',
                             path: dirfile
                         })
-                        .fetch('GET', 'https://www.dropbox.com/s/35kr6i0m45kabzg/iBook%20TV%20de%20paga.ibooks?dl=1', {
+                        .fetch('GET', urldownload, {
                             //some headers ..
                         })
                         // listen to download progress event
@@ -86,8 +94,13 @@ export default class App extends Component<Props> {
                         })
 
                 }  else {
-                    console.log("el archivo ya existe")
                     RNFetchBlob.ios.openDocument(dirfile)
+                        .catch((err) => {
+                            console.log("error ", err)
+                        })
+
+                    console.log("el archivo ya existe")
+                    console.log("ruta del archivo", dirfile)
                 }
             })
     };
