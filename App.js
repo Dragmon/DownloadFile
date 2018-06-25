@@ -26,11 +26,11 @@ export default class App extends Component<Props> {
 
     onPressDownload(){
         const dirs = RNFetchBlob.fs.dirs;
-        //let urldownload = 'https://www.dropbox.com/s/35kr6i0m45kabzg/iBook%20TV%20de%20paga.ibooks?dl=1';
-        let urldownload = 'https://apihavas.televisaventas.tv/global/uploads/ibooks/ibooks_screen_shot_2017_10_25_at_1_41_49_pm_png_thumb_400x720.jpg';
+        let urldownload = 'https://www.dropbox.com/s/35kr6i0m45kabzg/iBook%20TV%20de%20paga.ibooks?dl=1';
+        //let urldownload = 'https://apihavas.televisaventas.tv/global//uploads/catalogos-android-networks/parrillas_enero_pdf_pdf.pdf';
         let namefile = 'TV-paga';
-        //let extencion = '.ibooks';
-        let extencion = '.jpg';
+        let extencion = '.ibooks';
+        //let extencion = '.pdf';
         let dirfile = dirs.DocumentDir + '/' + namefile + extencion;
     /*
         RNFetchBlob.fs.exists(dirfile)
@@ -87,6 +87,10 @@ export default class App extends Component<Props> {
                         })
                         .then((res) => {
                             // the temp file path
+                            RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                                .catch((err) => {
+                                    console.log("error ", err)
+                                })
                             console.log('The file saved to ', res.path())
                         })
                         .catch((err) => {
@@ -94,7 +98,7 @@ export default class App extends Component<Props> {
                         })
 
                 }  else {
-                    RNFetchBlob.ios.openDocument(dirfile)
+                    RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
                         .catch((err) => {
                             console.log("error ", err)
                         })
