@@ -87,7 +87,8 @@ export default class App extends Component<Props> {
                         })
                         .then((res) => {
                             // the temp file path
-                            RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                            //RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                            RNFetchBlob.ios.previewDocument(dirfile)
                                 .catch((err) => {
                                     console.log("error ", err)
                                 })
@@ -98,7 +99,8 @@ export default class App extends Component<Props> {
                         })
 
                 }  else {
-                    RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                    //RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                    RNFetchBlob.ios.previewDocument(dirfile)
                         .catch((err) => {
                             console.log("error ", err)
                         })
