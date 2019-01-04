@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import AppIos from './App';
 
-AppRegistry.registerComponent('DownloadFile', () => App);
+AppRegistry.registerComponent('DownloadFile', () => AppIos);

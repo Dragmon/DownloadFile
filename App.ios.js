@@ -22,14 +22,22 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class App extends Component<Props> {
+export default class AppIos extends Component<Props> {
 
     onPressDownload(){
         const dirs = RNFetchBlob.fs.dirs;
-        let urldownload = 'https://www.dropbox.com/s/35kr6i0m45kabzg/iBook%20TV%20de%20paga.ibooks?dl=1';
+        //let urldownload = 'https://www.dropbox.com/s/35kr6i0m45kabzg/iBook%20TV%20de%20paga.ibooks?dl=1';
+        let urldownload = 'http://player.vimeo.com/external/301054861.sd.mp4?s=324054bcae97cd2eed2e7a5f70a0ca3580a8ec4d&profile_id=165&oauth2_token_id=925325063';
+        //let urldownload = 'https://www.adminconnect.televisaventas.tv/global/uploads/plancomercial-android/p_ibookpc2019_pptx.pptx';
+        //let urldownload = 'https://www.adminconnect.televisaventas.tv/global/uploads/presentaciones/gr_final_pdf.pdf';
         //let urldownload = 'https://apihavas.televisaventas.tv/global//uploads/catalogos-android-networks/parrillas_enero_pdf_pdf.pdf';
-        let namefile = 'TV-paga';
-        let extencion = '.ibooks';
+        //let namefile = 'TV-paga';
+        //let namefile = 'presentacion';
+        let namefile = 'video';
+        let extencion = '.mp4';
+        //let extencion = '.ibooks';
+        //let extencion = '.pptx';
+        //let extencion = '.pdf';
         //let extencion = '.pdf';
         let dirfile = dirs.DocumentDir + '/' + namefile + extencion;
     /*
@@ -94,7 +102,7 @@ export default class App extends Component<Props> {
                                 })
                             console.log('The file saved to ', res.path())
                         })
-                        .catch((err) => {
+                        .catch((err) => {openDocument
                             console.log("error ", err)
                         })
 
