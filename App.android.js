@@ -26,15 +26,17 @@ export default class AppIos extends Component<Props> {
         //let urldownload = 'https://apihavas.televisaventas.tv/global//uploads/catalogos-android-networks/parrillas_enero_pdf_pdf.pdf';
         //let namefile = 'TV-paga';
         //let namefile = 'presentacion';
-        let namefile = 'video';
+        let namefile = 'video-android-download';
         let extencion = '.mp4';
         //let extencion = '.ibooks';
         //let extencion = '.pptx';
         //let extencion = '.pdf';
         //let extencion = '.pdf';
-        let dirfile = dirs.DocumentDir + '/' + namefile + extencion;
+        //let dirfile = dirs.DocumentDir + '/' + namefile + extencion;
+        let dirfile = dirs.DownloadDir + '/' + namefile + extencion;
 
         console.log("dirs :", dirs);
+        console.log("dirfile :", dirfile);
 
     /* Descarga del archivo si no existe*/
 
@@ -61,11 +63,13 @@ export default class AppIos extends Component<Props> {
                         .then((res) => {
                             // the temp file path
                             //RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                            /*
                             RNFetchBlob.ios.previewDocument(dirfile)
                                 .catch((err) => {
                                     console.log("error ", err)
                                 })
-                            console.log('The file saved to ', res.path())
+                            */
+                            console.log('The file saved to ', res.path())                            
                         })
                         .catch((err) => {
                             console.log("error ", err)
@@ -73,10 +77,12 @@ export default class AppIos extends Component<Props> {
 
                 }  else {
                     //RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                    /*
                     RNFetchBlob.ios.previewDocument(dirfile)
                         .catch((err) => {
                             console.log("error ", err)
                         })
+                    */
 
                     console.log("el archivo ya existe")
                     console.log("ruta del archivo", dirfile)
