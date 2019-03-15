@@ -26,7 +26,7 @@ export default class AppIos extends Component<Props> {
         //let urldownload = 'https://apihavas.televisaventas.tv/global//uploads/catalogos-android-networks/parrillas_enero_pdf_pdf.pdf';
         //let namefile = 'TV-paga';
         //let namefile = 'presentacion';
-        let namefile = 'video-android-download';
+        let namefile = 'video-android-download8';
         let extencion = '.mp4';
         //let extencion = '.ibooks';
         //let extencion = '.pptx';
@@ -34,6 +34,7 @@ export default class AppIos extends Component<Props> {
         //let extencion = '.pdf';
         //let dirfile = dirs.DocumentDir + '/' + namefile + extencion;
         let dirfile = dirs.DownloadDir + '/' + namefile + extencion;
+        let filedownload = namefile + extencion;
 
         console.log("dirs :", dirs);
         console.log("dirfile :", dirfile);
@@ -44,14 +45,18 @@ export default class AppIos extends Component<Props> {
         RNFetchBlob.fs.exists(dirfile)
             .then((exist) => {
                 if (!exist){
-                    alert("Comenzo la descarga");
                     RNFetchBlob
                         .config({
                             // add this option that makes response data to be stored as a file,
                             // this is much more performant.
                             fileCache : true,
                             //appendExt : 'ibooks',
-                            path: dirfile
+                            path: dirfile,
+                            addAndroidDownloads:{
+                              notification: true,
+                              title: filedownload,
+                              description: 'An file.',
+                            }
                         })
                         .fetch('GET', urldownload, {
                             //some headers ..

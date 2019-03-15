@@ -23,6 +23,12 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class AppIos extends Component<Props> {
+    constructor(props){
+        super(props);
+        this.state ={
+            progressDownload: false
+        }
+    }
 
     onPressDownload(){
         const dirs = RNFetchBlob.fs.dirs;
@@ -73,7 +79,7 @@ export default class AppIos extends Component<Props> {
 
     /* Descarga del archivo si no existe*/
 
-
+        /*
         RNFetchBlob.fs.exists(dirfile)
             .then((exist) => {
                 if (!exist){
@@ -91,7 +97,9 @@ export default class AppIos extends Component<Props> {
                         })
                         // listen to download progress event
                         .progress((received, total) => {
-                            console.log('progress', received / total * 100)
+                            console.log('received', received)
+                            console.log('total', total)
+                            console.log('progress', Math.floor(received / total * 100))
                         })
                         .then((res) => {
                             // the temp file path
@@ -101,6 +109,7 @@ export default class AppIos extends Component<Props> {
                                     console.log("error ", err)
                                 })
                             console.log('The file saved to ', res.path())
+                            console.log('Descarga completada')
                         })
                         .catch((err) => {openDocument
                             console.log("error ", err)
@@ -117,9 +126,65 @@ export default class AppIos extends Component<Props> {
                     console.log("ruta del archivo", dirfile)
                 }
             })
+            */
+
+        RNFetchBlob.fs.exists(dirfile)
+            .then((exist) => {
+                if (!exist) {
+                    alert("Comenzo la descarga")                    
+                    /*
+                    this.setState({
+                        progressDownload: true,
+                    })
+                    */
+                    RNFetchBlob
+                        .config({
+                            // add this option that makes response data to be stored as a file,
+                            // this is much more performant.
+                            fileCache: true,
+                            //appendExt : 'ibooks',
+                            path: dirfile,
+                            notification: true,
+                        })
+                        .fetch('GET', urldownload, {
+                            //some headers ..
+                        })
+                        // listen to download progress event
+                        .progress((received, total) => {
+                            progress = Math.floor(received / total * 100)
+                            console.log('progress', progress)
+                        })
+                        .then((res) => {
+                            console.log("apertura del documento")
+                            // the temp file path
+                            //RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                            RNFetchBlob.ios.previewDocument(dirfile)
+                                .catch((err) => {
+                                    console.log("error ", err)
+                                })
+                            console.log('The file saved to ', res.path())
+                            console.log('Descarga completada')
+                        })
+                        .catch((err) => {
+                            openDocument
+                            console.log("error ", err)
+                        })
+
+                } else {
+                    //RNFetchBlob.ios.previewDocument(dirs.DocumentDir + '/' + namefile + extencion)
+                    RNFetchBlob.ios.previewDocument(dirfile)
+                        .catch((err) => {
+                            console.log("error ", err)
+                        })
+
+                    console.log("el archivo ya existe")
+                    console.log("ruta del archivo", dirfile)
+                }
+            })
     };
 
   render() {
+      console.log('progress-cargar',this.state.progressDownload)
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
